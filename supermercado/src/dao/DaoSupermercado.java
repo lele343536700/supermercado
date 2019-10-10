@@ -122,8 +122,11 @@ public class DaoSupermercado {
                 Supermercado objeto = new Supermercado();
                 //definir um set para cada atributo da entidade, cuidado com o tipo
                 objeto.setCodigo(rs.getInt("codigo"));
-                objeto.setNome(rs.getString("nome"));
-                objeto.setDescricao(rs.getString("descricao"));
+                objeto.setNome_fantasia(rs.getString("nome_fantasia"));
+                objeto.setRazao_social(rs.getString("razao_social"));
+                objeto.setNr_de_funcionarios(rs.getInt("nr_de_funcionarios"));
+                objeto.setValor_na_bolsa(rs.getDouble("valor_na_bolsa"));
+                objeto.setFundacao(rs.getDate("fundacao").toLocalDate());
                 return objeto;//não mexa nesse, ele adiciona o objeto na lista
             }
         } catch (SQLException | ClassNotFoundException ex) {

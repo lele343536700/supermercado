@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Vector;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Administrador
@@ -34,6 +35,10 @@ public class ControladorSupermercado {
         boolean resultado = DaoSupermercado.inserir(objeto);
         if (resultado) {
             JOptionPane.showMessageDialog(null, "Inserido com sucesso!");
+            if (man.listagem != null) {
+     atualizarTabela(man.listagem.tabela); //atualizar a tabela da listagem
+}
+man.dispose();//fechar a tela da manutenção
         } else {
             JOptionPane.showMessageDialog(null, "Erro!");
         }
@@ -52,6 +57,10 @@ public class ControladorSupermercado {
         boolean resultado = DaoSupermercado.alterar(objeto);
         if (resultado) {
             JOptionPane.showMessageDialog(null, "Alterado com sucesso!");
+            if (man.listagem != null) {
+     atualizarTabela(man.listagem.tabela); //atualizar a tabela da listagem
+}
+man.dispose();//fechar a tela da manutenção
         } else {
             JOptionPane.showMessageDialog(null, "Erro!");
         }
@@ -64,6 +73,10 @@ public class ControladorSupermercado {
         boolean resultado = DaoSupermercado.excluir(objeto);
         if (resultado) {
             JOptionPane.showMessageDialog(null, "Excluído com sucesso!");
+            if (man.listagem != null) {
+     atualizarTabela(man.listagem.tabela); //atualizar a tabela da listagem
+}
+man.dispose();//fechar a tela da manutenção
         } else {
             JOptionPane.showMessageDialog(null, "Erro!");
         }
@@ -92,5 +105,17 @@ public class ControladorSupermercado {
             modelo.addRow(linha); //adicionando a linha na tabela
         }
         tabela.setModel(modelo);
+    }
+        public static void atualizaCampos(ManutencaoSupermercado man, int pk){ 
+        Supermercado objeto = DaoSupermercado.consultar(pk);
+        //Definindo os valores do campo na tela (um para cada atributo/campo)
+        man.jtfcodigo.setText(objeto.getCodigo().toString());
+        man.jtfnomefantasia.setText(objeto.getNome_fantasia());
+        man.jtfrazaosocial.setText(objeto.getRazao_social());
+        man.jtfnrfuncionarios.setText(objeto.getNr_de_funcionarios().toString());
+        man.jtfvalorbolsa.setText(objeto.getValor_na_bolsa().toString());
+        man.jtffundacao.setText(objeto.getFundacao().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+        man.jtfcodigo.setEnabled(false); //desabilitando o campo código
+        man.btnadicionar.setEnabled(false); //desabilitando o botão adicionar
     }
 }

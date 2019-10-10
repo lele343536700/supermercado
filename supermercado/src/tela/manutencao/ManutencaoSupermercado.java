@@ -4,19 +4,40 @@
  * and open the template in the editor.
  */
 package tela.manutencao;
-
+import tela.listagem.ListagemSupermercado;
 /**
  *
  * @author Administrador
  */
 public class ManutencaoSupermercado extends javax.swing.JDialog {
-
+  public ListagemSupermercado listagem;
     /**
      * Creates new form ManutencaoSupermercado
      */
     public ManutencaoSupermercado(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        
+    }
+ //Entrando na Manutenção de Produto para Adicionar um novo Produto (OBS: o nome do método deverá ser o mesmo nome da classe)
+     public ManutencaoSupermercado(java.awt.Frame parent, boolean modal, ListagemSupermercado listagem) {
+        super(parent, modal);
+        initComponents();
+        this.listagem = listagem;
+        
+        
+        jtfcodigo.setEnabled(false);  //desabilitando a edição do campo código
+        btnalterar.setEnabled(false); //desabilitando o botão alterar
+        btnexcluir.setEnabled(false); //desabilitando o botão excluir
+        
+  }
+      public ManutencaoSupermercado(java.awt.Frame parent, boolean modal, ListagemSupermercado listagem, int pk) {
+        super(parent, modal);
+        initComponents();
+        
+        jtfcodigo.setEnabled(false);  //desabilitando a edição do campo código
+        this.listagem = listagem;
+        controlador.ControladorSupermercado.atualizaCampos(this, pk);//pegando os valores do BD e colocando na tela
     }
 
     /**
